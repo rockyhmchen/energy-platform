@@ -27,7 +27,7 @@ curl http://localhost:8080/consumption/latest
 
 ## Get latest energy production data
 
-Use the following API endpoint to get the random production data generated 5 minutes
+Use the following API endpoint to get the random production data generated every 5 minutes
 
 Endpoint:
 ```shell
