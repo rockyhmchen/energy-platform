@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: back-end
+
+management:
+  endpoints:
+    web:
+      base-path: /
+
+thirdPartyApi:
+  energyDataApi:
+    baseUrl: "http://localhost:8080"
+    apiKey: ${ENERGY_DATA_API_KEY}
+  weatherApi:
+    baseUrl: "https://api.openweathermap.org"
+    apiKey: ${WEATHER_API_KEY}
+
+jobs:
+  schedule:
+    weatherData: ${WEATHER_DATA_JOB_CRON:"0 0 */1 * * *"}
+    consumptionData: ${CONSUMPTION_DATA_JOB_CRON:"0 0 */1 * * *"}
+    productionData: ${PRODUCTION_DATA_JOB_CRON:"0 */5 * * * *"}

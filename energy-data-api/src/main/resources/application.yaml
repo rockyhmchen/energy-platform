@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: energy-data-api
+
+management:
+  endpoints:
+    web:
+      base-path: /
