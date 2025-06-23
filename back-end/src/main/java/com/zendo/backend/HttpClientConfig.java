@@ -18,7 +18,7 @@ public class HttpClientConfig {
     @Bean
     public EnergyDataApiClient energyDataApiClient(WebClient.Builder webClientBuilder,
                                                    @Value("${thirdPartyApi.energyDataApi.baseUrl}") String baseUrl,
-                                                   @Value("${thirdPartyApi.energyDataApi.key}") String apiKey) {
+                                                   @Value("${thirdPartyApi.energyDataApi.apiKey}") String apiKey) {
         var webClient = webClientBuilder.baseUrl(baseUrl)
                 .defaultHeader("X-API-KEY", apiKey)
                 .build();

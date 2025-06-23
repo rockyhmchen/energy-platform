@@ -52,7 +52,7 @@ public class WeatherApiServiceImpl implements WeatherApiService {
     private final WeatherApiClient weatherApiClient;
     private final WeatherRepository weatherRepository;
 
-    @Value("${thirdPartyApi.weatherApi.key}")
+    @Value("${thirdPartyApi.weatherApi.apiKey}")
     private String apiKey;
 
     /**

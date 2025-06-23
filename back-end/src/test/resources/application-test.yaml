@@ -1,3 +1,27 @@
 logging:
   level:
     root: debug
+
+spring:
+  jpa:
+    defer-datasource-initialization: true
+    database: default
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+
+thirdPartyApi:
+  energyDataApi:
+    baseUrl: "http://localhost:30031"
+    apiKey: "test-api-key"
+  weatherApi:
+    baseUrl: "http://localhost:30030"
+    apiKey: "test-api-key"

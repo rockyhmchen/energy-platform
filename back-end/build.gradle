@@ -33,13 +33,11 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
-//    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
-    testImplementation 'com.github.tomakehurst:wiremock:3.0.1'
-//    testImplementation 'org.dbunit:dbunit:2.7.3'
+    testImplementation 'org.wiremock.integrations:wiremock-spring-boot:3.10.0'
     testImplementation 'org.dbunit:dbunit:3.0.0'
 
     testImplementation platform('org.apache.groovy:groovy-bom:4.0.27')

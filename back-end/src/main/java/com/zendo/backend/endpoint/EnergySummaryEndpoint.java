@@ -33,7 +33,7 @@ public class EnergySummaryEndpoint {
      *
      * @return a {@link ResponseEntity} containing an {@link EnergySummary} object
      */
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<EnergySummary> get() {
         var allEnergyDetail = energyDetailService.getAll();
         var totalConsumption = sum(allEnergyDetail, EnergyDetail::getConsumptionKwh);

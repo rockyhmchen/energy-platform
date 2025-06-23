@@ -29,7 +29,7 @@ public class HistoricalDataEndpoint {
      *
      * @return a ResponseEntity containing a list of HistoricalData objects representing the last 24 hours of energy data
      */
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<HistoricalData>> get() {
         var now = dateTimeHelper.now();
         var energyDetails = energyDetailService.getLast24HoursData(now);
