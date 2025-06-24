@@ -29,7 +29,7 @@ thirdPartyApi:
 
 jobs:
   schedule:
-    enabled: false
+    enabled: ${RUN_DATA_COLLECTORS:false}
     weatherData: ${WEATHER_DATA_JOB_CRON:0 0 */1 * * *}
     consumptionData: ${CONSUMPTION_DATA_JOB_CRON:0 0 */1 * * *}
     productionData: ${PRODUCTION_DATA_JOB_CRON:0 */5 * * * *}

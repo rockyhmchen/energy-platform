@@ -52,7 +52,7 @@ public class HistoricalDataEndpoint {
                 .consumptionKwh(energyDetail.getConsumptionKwh())
                 .productionKwh(energyDetail.getProductionKwh())
                 .netBalanceKwh(energyDetail.getNetBalanceKwh())
-                .solarProduction(energyDetail.getSolarProductionKwh())
+                .solarProductionKwh(energyDetail.getSolarProductionKwh())
                 .solarIrradianceWm2(energyDetail.getSolarIrradianceWm2())
                 .temperatureCelsius(energyDetail.getTemperatureCelsius())
                 .cloudCoverDecimal(energyDetail.getCloudCoverDecimal())

@@ -125,6 +125,7 @@ This section describes how to set up the project locally and to get a local copy
 - `WEATHER_DATA_JOB_CRON`: The interval for weather data fetching in the cron expression format. Default value: `0 0 */1 * * *` - every one hour
 - `CONSUMPTION_DATA_JOB_CRON`: The interval for consumption data fetching in the cron expression format. Default value: `0 */5 * * * *` - every one hour
 - `PRODUCTION_DATA_JOB_CRON`: The interval for production data fetching in the cron expression format. Default value: `0 0 */1 * * *` - every 5 minutes
+- `RUN_DATA_COLLECTORS`: To turn on the data collection jobs. Default value: `false`
 
 
 <!-- REPOSITORY STRUCTURE -->

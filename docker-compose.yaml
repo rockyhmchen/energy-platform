@@ -1,0 +1,28 @@
+version: '3'
+services:
+  front-end:
+    image: zendoenergy.com/front-end:0.0.1
+    environment:
+      NEXT_PUBLIC_BACK_END_API_URL: http://back-end:8080
+      NEXT_PUBLIC_TO_CALL_BACK_END: false
+    ports:
+      - 3000:3000
+
+  back-end:
+    image: zendoenergy.com/back-end:0.0.1
+    environment:
+      ENERGY_DATA_API_BASE_URL: http://energy-data-api:8888
+      ENERGY_DATA_API_KEY: test-api-key
+      WEATHER_API_BASE_URL: https://api.openweathermap.org
+      WEATHER_API_KEY:
+      WEATHER_DATA_JOB_CRON: 0 0 */1 * * *
+      CONSUMPTION_DATA_JOB_CRON: 0 0 */1 * * *
+      PRODUCTION_DATA_JOB_CRON: 0 */5 * * * *
+      RUN_DATA_COLLECTORS: false
+    ports:
+      - 8080:8080
+
+  energy-data-api:
+    image: zendoenergy.com/energy-data-api:0.0.1
+    ports:
+      - 8888:8888

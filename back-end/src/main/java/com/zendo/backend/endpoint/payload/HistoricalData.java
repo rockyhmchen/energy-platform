@@ -26,7 +26,7 @@ public class HistoricalData {
     private BigDecimal productionKwh;
     private BigDecimal consumptionKwh;
     private BigDecimal netBalanceKwh;
-    private BigDecimal solarProduction;
+    private BigDecimal solarProductionKwh;
     private BigDecimal solarIrradianceWm2;
     private BigDecimal temperatureCelsius;
     private BigDecimal cloudCoverDecimal;

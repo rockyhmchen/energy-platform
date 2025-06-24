@@ -21,7 +21,7 @@ Response:
 
 curl:
 ```shell
-curl http://localhost:8080/consumption/latest?lat=51.5085&lon=-0.1257
+curl http://localhost:8888/consumption/latest?lat=51.5085&lon=-0.1257
 ```
 
 
@@ -48,7 +48,7 @@ Response:
 
 curl:
 ```shell
-curl http://localhost:8080/production/latest?lat=51.5085&lon=-0.1257
+curl http://localhost:8888/production/latest?lat=51.5085&lon=-0.1257
 ```
 
 ## Get health of the service
@@ -103,5 +103,5 @@ This section describes how to set up the project locally and to get a local copy
 
 * Run the docker image
   ```shell
-  docker run --rm -it -p 8080:8080 zendoenergy.com/energy-data-api:0.0.1
+  docker run --rm -it -p 8888:8888 zendoenergy.com/energy-data-api:0.0.1
   ```

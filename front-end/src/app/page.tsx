@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Line } from "react-chartjs-2";
 import {
@@ -15,57 +15,89 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
+const toCallBackEnd = process.env.NEXT_PUBLIC_TO_CALL_BACK_END || false;
+
 export default function Home() {
   const [summary, setSummary] = useState({});
   const [historical, setHistorical] = useState([]);
-  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-    setSummary({
-      "totalProductionKwh": 3.8,
-      "totalConsumptionKwh": 2.4,
-      "netBalanceKwh": 1.2,
-      "weather": {
-        "temperatureCelsius": 23.7,
-        "cloudCoverDecimal": 11,
-        "windSpeedInSecond": 25,
-        "solarIrradianceWm2": 6.4
-      },
-      "correlation": {
-        "solarIrradianceVsSolarProduction": -2.8,
-        "temperatureVsEnergyConsumption": 3.2
-      }
-    });
-
-    setHistorical([
-      {
-        "timestamp": "2025-01-01T00:00:00.000+0000",
-        "productionKwh": 3.8,
-        "consumptionKwh": 2.4,
+    async function fetchEnergySummary() {
+      console.log("calling the backend api to fetch the energy summary: " + toCallBackEnd);
+      let energySummary = {
+        "totalProductionKwh": 3.8,
+        "totalConsumptionKwh": 2.4,
         "netBalanceKwh": 1.2,
-        "solarProduction": 2.1,
-        "temperatureCelsius": 23.7,
-        "solarIrradianceWm2": 6.4
-      },
-      {
-        "timestamp": "2025-01-01T01:00:00.000+0000",
-        "productionKwh": 1.8,
-        "consumptionKwh": 3.4,
-        "netBalanceKwh": 5.2,
-        "solarProduction": 6.1,
-        "temperatureCelsius": 24.1,
-        "solarIrradianceWm2": 6.5
+        "weather": {
+          "temperatureCelsius": 23.7,
+          "cloudCoverDecimal": 11,
+          "windSpeedInSecond": 25,
+          "solarIrradianceWm2": 6.4
+        },
+        "correlation": {
+          "solarIrradianceVsSolarProduction": -2.8,
+          "temperatureVsEnergyConsumption": 3.2
+        }
+      };
+
+      if (toCallBackEnd === "true") {
+        const energySummaryRes = await fetch('/api/energy-summary');
+        energySummary = await energySummaryRes.json();
       }
-    ])
-    // fetch("/api/energy-summary")
-    //   .then((res) => res.json())
-    //   .then(setSummary);
-    //
-    // fetch("/api/historical-data")
-    //   .then((res) => res.json())
-    //   .then(setHistorical);
-  }, [])
+      setSummary(energySummary);
+    }
+
+    async function fetchHistoricalData() {
+      console.log("calling the backend api to fetch the historical data: " + toCallBackEnd);
+      let historicalData = [
+        {
+          "timestamp": "2025-01-01T00:00:00.000+0000",
+          "productionKwh": 3.8,
+          "consumptionKwh": 2.4,
+          "netBalanceKwh": 1.2,
+          "solarProduction": 2.1,
+          "temperatureCelsius": 23.7,
+          "solarIrradianceWm2": 6.4
+        },
+        {
+          "timestamp": "2025-01-01T01:00:00.000+0000",
+          "productionKwh": 1.8,
+          "consumptionKwh": 3.4,
+          "netBalanceKwh": 5.2,
+          "solarProduction": 6.1,
+          "temperatureCelsius": 24.1,
+          "solarIrradianceWm2": 6.5
+        },
+        {
+          "timestamp": "2025-01-01T02:00:00.000+0000",
+          "productionKwh": 2.8,
+          "consumptionKwh": 4.4,
+          "netBalanceKwh": 6.2,
+          "solarProduction": 7.1,
+          "temperatureCelsius": 21.1,
+          "solarIrradianceWm2": 12.5
+        },
+        {
+          "timestamp": "2025-01-01T03:00:00.000+0000",
+          "productionKwh": 3.8,
+          "consumptionKwh": 5.4,
+          "netBalanceKwh": 11.2,
+          "solarProduction": 9.1,
+          "temperatureCelsius": 20.1,
+          "solarIrradianceWm2": 18.5
+        }
+      ];
+
+      if (toCallBackEnd === "true") {
+        const historicalDataRes = await fetch('/api/historical-data');
+        historicalData = await historicalDataRes.json();
+      }
+      setHistorical(historicalData);
+    }
+
+    fetchEnergySummary();
+    fetchHistoricalData();
+  }, []);
 
   if (!summary) return <div className="p-8">Loading...</div>;
 
