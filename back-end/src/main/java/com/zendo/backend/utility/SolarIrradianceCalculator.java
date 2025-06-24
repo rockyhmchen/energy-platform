@@ -10,10 +10,10 @@ public final class SolarIrradianceCalculator {
     /**
      * Estimates the solar irradiance based on the given un-index value.
      *
-     * @param unIndex the un-index value used for estimation
+     * @param uvIndex the un-index value used for estimation
      * @return the estimated solar irradiance
      */
-    public static BigDecimal estimate(final BigDecimal unIndex) {
-        return unIndex.multiply(new BigDecimal(25));
+    public static BigDecimal estimate(final BigDecimal uvIndex) {
+        return uvIndex.multiply(new BigDecimal(25));
     }
 }

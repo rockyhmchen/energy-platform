@@ -18,8 +18,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class GetEnergySummarySpec extends ComponentTestSpec {
 
-    WireMockServer mockWeatherApi;
-    WireMockServer mockEnergyDataApi;
+    @Autowired
+    EnergyDetailRepository energyDetailRepository
+    WireMockServer mockWeatherApi
+    WireMockServer mockEnergyDataApi
 
     def setup() {
         this.mockWeatherApi = new WireMockServer(30030)
@@ -29,14 +31,12 @@ class GetEnergySummarySpec extends ComponentTestSpec {
     }
 
     def cleanup() {
+        energyDetailRepository.deleteAll()
         mockWeatherApi.stop()
         mockEnergyDataApi.stop()
     }
 
-    @Autowired
-    EnergyDetailRepository energyDetailRepository;
-
-    def "Should return energy summary data"() {
+    def "Should return energy summary"() {
         given:
         energyDetailRepository.save(EnergyDetail.builder()
                 .timestamp(OffsetDateTime.now())
@@ -44,7 +44,7 @@ class GetEnergySummarySpec extends ComponentTestSpec {
                 .productionKwh(6.8)
                 .solarProductionKwh(5.1)
                 .solarIrradianceWm2(25.0)
-                .unIndex(1.0)
+                .uvIndex(1.0)
                 .netBalanceKwh(3.6)
                 .cloudCoverDecimal(1.38)
                 .temperatureCelsius(24.7)
@@ -58,7 +58,7 @@ class GetEnergySummarySpec extends ComponentTestSpec {
                 .productionKwh(5.8)
                 .solarProductionKwh(4.1)
                 .solarIrradianceWm2(250.0)
-                .unIndex(10.0)
+                .uvIndex(10.0)
                 .netBalanceKwh(2.6)
                 .cloudCoverDecimal(0.38)
                 .temperatureCelsius(23.7)

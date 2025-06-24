@@ -3,20 +3,19 @@ logging:
     root: debug
 
 spring:
-  jpa:
-    defer-datasource-initialization: true
-    database: default
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
-
-  h2:
-    console:
-      enabled: true
-
   datasource:
     url: jdbc:h2:mem:test
     driverClassName: org.h2.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
 
 thirdPartyApi:
   energyDataApi:
@@ -25,3 +24,7 @@ thirdPartyApi:
   weatherApi:
     baseUrl: "http://localhost:30030"
     apiKey: "test-api-key"
+
+jobs:
+  schedule:
+    enabled: false

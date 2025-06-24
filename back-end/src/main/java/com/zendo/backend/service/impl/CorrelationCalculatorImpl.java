@@ -8,10 +8,13 @@ import java.util.Objects;
 import com.zendo.backend.entity.EnergyDetail;
 import com.zendo.backend.repository.EnergyDetailRepository;
 import com.zendo.backend.service.CorrelationCalculator;
+import com.zendo.backend.utility.BigDecimalUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.springframework.stereotype.Service;
+
+import static java.lang.Double.NaN;
 
 /**
  * Implementation of the {@link CorrelationCalculator} interface, providing methods to calculate
@@ -64,7 +67,7 @@ public class CorrelationCalculatorImpl implements CorrelationCalculator {
         var pearsonsCorrelation = new PearsonsCorrelation();
         var correlation = pearsonsCorrelation.correlation(solarIrradiances, solarProductions);
 
-        return BigDecimal.valueOf(correlation);
+        return BigDecimalUtility.doubleToDecimal(correlation);
     }
 
     /**
@@ -106,6 +109,6 @@ public class CorrelationCalculatorImpl implements CorrelationCalculator {
         var pearsonsCorrelation = new PearsonsCorrelation();
         var correlation = pearsonsCorrelation.correlation(temperature, consumption);
 
-        return BigDecimal.valueOf(correlation);
+        return BigDecimalUtility.doubleToDecimal(correlation);
     }
 }

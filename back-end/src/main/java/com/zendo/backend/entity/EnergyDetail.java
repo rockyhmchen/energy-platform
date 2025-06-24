@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.UuidGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "energy_details")
+@Table(name = "ENERGY_DETAILS")
 public class EnergyDetail extends Auditable {
 
     /**
@@ -41,7 +43,7 @@ public class EnergyDetail extends Auditable {
     private BigDecimal temperatureCelsius;
     private BigDecimal cloudCoverDecimal;
     private BigDecimal windSpeedInSecond;
-    private BigDecimal unIndex;
+    private BigDecimal uvIndex;
     private BigDecimal solarIrradianceWm2;
     private BigDecimal solarIrradianceVsSolarProduction;
     private BigDecimal temperatureVsEnergyConsumption;

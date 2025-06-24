@@ -7,6 +7,7 @@ import com.zendo.backend.apiclient.WeatherApiClient;
 import com.zendo.backend.entity.Weather;
 import com.zendo.backend.repository.WeatherRepository;
 import com.zendo.backend.service.WeatherApiService;
+import com.zendo.backend.utility.BigDecimalUtility;
 import com.zendo.backend.utility.SolarIrradianceCalculator;
 import com.zendo.backend.utility.TypeConvertorUtility;
 import jakarta.transaction.Transactional;
@@ -14,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import static com.zendo.backend.constant.GeographicCoordinate.LONDON_LATITUDE;
+import static com.zendo.backend.constant.GeographicCoordinate.LONDON_LONGITUDE;
 
 /**
  * The WeatherApiServiceImpl class provides an implementation of the {@link WeatherApiService} interface.
@@ -28,16 +32,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class WeatherApiServiceImpl implements WeatherApiService {
-
-    /**
-     * The default latitude for the location.
-     */
-    private static final double LATITUDE = 51.5085;
-
-    /**
-     * The default longitude for the location.
-     */
-    private static final double LONGITUDE = -0.1257;
 
     /**
      * The parts of the response to exclude from the OpenWeatherMap API.
@@ -97,7 +91,7 @@ public class WeatherApiServiceImpl implements WeatherApiService {
             throw new IllegalArgumentException("Input param 'now' must not be null");
         }
 
-        var response = weatherApiClient.getCurrentWeather(LATITUDE, LONGITUDE, EXCLUDE, UNITS, apiKey);
+        var response = weatherApiClient.getCurrentWeather(LONDON_LATITUDE, LONDON_LONGITUDE, EXCLUDE, UNITS, apiKey);
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new IllegalStateException(String.format("Failed to fetch the current weather data. Http status code: %d",
                                                           response.getStatusCode().value()));
@@ -111,12 +105,12 @@ public class WeatherApiServiceImpl implements WeatherApiService {
 
         var entity = Weather.builder()
                 .timestamp(now)
-                .temperatureCelsius(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getTemperature()))
-                .cloudCoverDecimal(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getClouds()))
-                .windSpeedInSecond(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getWindSpeed()))
-                .uvIndex(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getUvi()))
-                .atmosphericPressureHpa(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getPressure()))
-                .averageVisibility(TypeConvertorUtility.numberToBigDecimal(data.getDetail().getVisibility()))
+                .temperatureCelsius(BigDecimalUtility.numberToBigDecimal(data.getDetail().getTemperature()))
+                .cloudCoverDecimal(BigDecimalUtility.numberToBigDecimal(data.getDetail().getClouds()))
+                .windSpeedInSecond(BigDecimalUtility.numberToBigDecimal(data.getDetail().getWindSpeed()))
+                .uvIndex(BigDecimalUtility.numberToBigDecimal(data.getDetail().getUvi()))
+                .atmosphericPressureHpa(BigDecimalUtility.numberToBigDecimal(data.getDetail().getPressure()))
+                .averageVisibility(BigDecimalUtility.numberToBigDecimal(data.getDetail().getVisibility()))
                 .sunriseTime(TypeConvertorUtility.epochToOffsetDateTime(data.getDetail().getSunrise()))
                 .sunsetTime(TypeConvertorUtility.epochToOffsetDateTime(data.getDetail().getSunset()))
                 .build();

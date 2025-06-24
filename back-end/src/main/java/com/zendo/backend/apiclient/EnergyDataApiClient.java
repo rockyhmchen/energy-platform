@@ -3,6 +3,7 @@ package com.zendo.backend.apiclient;
 import com.zendo.backend.apiclient.model.ConsumptionResponse;
 import com.zendo.backend.apiclient.model.ProductionResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 
 /**
@@ -20,7 +21,8 @@ public interface EnergyDataApiClient {
      *         indicating the result of the request.
      */
     @GetExchange("/consumption/latest")
-    ResponseEntity<ConsumptionResponse> getLatestConsumption();
+    ResponseEntity<ConsumptionResponse> getLatestConsumption(@RequestParam(name = "lat", defaultValue = "51.5085") double latitude,
+                                                             @RequestParam(name = "lon", defaultValue = "-0.1257") double longitude);
 
     /**
      * Retrieves the latest energy production data from the API.
@@ -29,5 +31,6 @@ public interface EnergyDataApiClient {
      *         indicating the result of the request.
      */
     @GetExchange("/production/latest")
-    ResponseEntity<ProductionResponse> getLatestProduction();
+    ResponseEntity<ProductionResponse> getLatestProduction(@RequestParam(name = "lat", defaultValue = "51.5085") double latitude,
+                                                           @RequestParam(name = "lon", defaultValue = "-0.1257") double longitude);
 }

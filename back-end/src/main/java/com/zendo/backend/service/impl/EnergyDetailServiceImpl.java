@@ -129,7 +129,7 @@ public class EnergyDetailServiceImpl implements EnergyDetailService {
         toBePatched.setTemperatureCelsius(average(weathers, Weather::getTemperatureCelsius));
         toBePatched.setCloudCoverDecimal(average(weathers, Weather::getCloudCoverDecimal));
         toBePatched.setWindSpeedInSecond(average(weathers, Weather::getWindSpeedInSecond));
-        toBePatched.setUnIndex(average(weathers, Weather::getUvIndex));
+        toBePatched.setUvIndex(average(weathers, Weather::getUvIndex));
         toBePatched.setSolarIrradianceWm2(average(weathers, Weather::getSolarIrradianceWm2));
         toBePatched.setNetBalanceKwh(toBePatched.getProductionKwh().subtract(toBePatched.getConsumptionKwh()));
 
@@ -164,7 +164,7 @@ public class EnergyDetailServiceImpl implements EnergyDetailService {
         energyDetail.setTemperatureCelsius(average(weathers, Weather::getTemperatureCelsius));
         energyDetail.setCloudCoverDecimal(average(weathers, Weather::getCloudCoverDecimal));
         energyDetail.setWindSpeedInSecond(average(weathers, Weather::getWindSpeedInSecond));
-        energyDetail.setUnIndex(average(weathers, Weather::getUvIndex));
+        energyDetail.setUvIndex(average(weathers, Weather::getUvIndex));
         energyDetail.setSolarIrradianceWm2(average(weathers, Weather::getSolarIrradianceWm2));
         energyDetail.setNetBalanceKwh(energyDetail.getProductionKwh().subtract(energyDetail.getConsumptionKwh()));
 

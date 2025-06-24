@@ -16,21 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 public final class TypeConvertorUtility {
 
     /**
-     * Converts a Number to a BigDecimal.
-     *
-     * @param number the Number to be converted
-     * @return the BigDecimal representation of the Number, or null if the input is null
-     */
-    public static BigDecimal numberToBigDecimal(final Number number) {
-        if (Objects.isNull(number)) {
-            logger.warn("The number to be converted to BigDecimal is null. Return null");
-            return null;
-        }
-
-        return BigDecimal.valueOf(number.doubleValue());
-    }
-
-    /**
      * Converts an epoch time (in seconds) to an OffsetDateTime.
      *
      * @param epoch the epoch time to be converted

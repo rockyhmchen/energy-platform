@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.zendo.backend.constant.GeographicCoordinate.LONDON_LATITUDE;
+import static com.zendo.backend.constant.GeographicCoordinate.LONDON_LONGITUDE;
+
 /**
  * Implementation of the {@link ProductionApiService} interface.
  * This class is responsible for fetching the latest production data from an external API and storing it in the database.
@@ -43,7 +46,7 @@ public class ProductionApiServiceImpl implements ProductionApiService {
     @Override
     @Transactional
     public Production fetchAndStore() {
-        var response = energyDataApiClient.getLatestProduction();
+        var response = energyDataApiClient.getLatestProduction(LONDON_LATITUDE, LONDON_LONGITUDE);
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new IllegalStateException(String.format("Failed to fetch the latest production data. Http status code: %d",
                                                           response.getStatusCode().value()));

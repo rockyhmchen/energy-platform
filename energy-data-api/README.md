@@ -8,7 +8,7 @@ Use the following API endpoint to get the random consumption data generated ever
 
 Endpoint:
 ```shell
-GET /consumption/latest
+GET /consumption/latest?lat=51.5085&lon=-0.1257
 ```
 
 Response:
@@ -21,7 +21,7 @@ Response:
 
 curl:
 ```shell
-curl http://localhost:8080/consumption/latest
+curl http://localhost:8080/consumption/latest?lat=51.5085&lon=-0.1257
 ```
 
 
@@ -31,7 +31,7 @@ Use the following API endpoint to get the random production data generated every
 
 Endpoint:
 ```shell
-GET /production/latest
+GET /production/latest?lat=51.5085&lon=-0.1257
 ```
 
 Response:
@@ -48,7 +48,7 @@ Response:
 
 curl:
 ```shell
-curl http://localhost:8080/production/latest
+curl http://localhost:8080/production/latest?lat=51.5085&lon=-0.1257
 ```
 
 ## Get health of the service

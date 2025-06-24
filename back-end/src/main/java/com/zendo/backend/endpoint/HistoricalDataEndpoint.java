@@ -50,11 +50,15 @@ public class HistoricalDataEndpoint {
         return HistoricalData.builder()
                 .timestamp(energyDetail.getTimestamp())
                 .consumptionKwh(energyDetail.getConsumptionKwh())
-                .productionKwh(energyDetail.getConsumptionKwh())
+                .productionKwh(energyDetail.getProductionKwh())
                 .netBalanceKwh(energyDetail.getNetBalanceKwh())
                 .solarProduction(energyDetail.getSolarProductionKwh())
                 .solarIrradianceWm2(energyDetail.getSolarIrradianceWm2())
                 .temperatureCelsius(energyDetail.getTemperatureCelsius())
+                .cloudCoverDecimal(energyDetail.getCloudCoverDecimal())
+                .windSpeedInSecond(energyDetail.getWindSpeedInSecond())
+                .solarIrradianceVsSolarProduction(energyDetail.getSolarIrradianceVsSolarProduction())
+                .temperatureVsEnergyConsumption(energyDetail.getTemperatureVsEnergyConsumption())
                 .build();
     }
 }
